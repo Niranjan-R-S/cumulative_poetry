@@ -56,18 +56,18 @@ Flags supported
 
 Example usage:
 
-`$ java -jar poetry-class.jar --reveal-for-day 1`
+`$ java -jar build/libs/poetry-class.jar --reveal-for-day 1`
 ```
 This is the house that Jack built.
 ```
 
-`$ java -jar poetry-class.jar --reveal-for-day 2`
+`$ java -jar build/libs/poetry-class.jar --reveal-for-day 2`
 ```
 This is the malt that lay in
     the house that Jack built.
 ```
 
-`$ java -jar poetry-class.jar --recite`
+`$ java -jar build/libs/poetry-class.jar --recite`
 ```
 Day 1 -
 This is the house that Jack built.

@@ -3,127 +3,140 @@
  */
 package cumulative_poetry;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-interface PoetryClass{
-  public String poetryTaleOperation();
+interface Poetry{
+  public String revealPoetry();
 }
 
-class PoetryTale extends GetPoetryTale implements PoetryClass{
+class PoetryTaleForDay implements Poetry{
+  private CumulativePoetry getPoetryTale;
 
-  PoetryTale(String[] taleForDay, List<String> args){
-    this.day = taleForDay;
-    this.operationList = args;
-    this.finalString = "";
-    this.maxDayLimit = 12;
-    this.minDayLimit = 0;
+  PoetryTaleForDay(CumulativePoetry getPoetryTale){
+      this.getPoetryTale = getPoetryTale;
   }
 
-  public String poetryTaleOperation(){
-    Integer dayValue = 0;
-    dayValue = Integer.parseInt(operationList.get(1));
-    if(dayValue > this.minDayLimit &&  dayValue <= this.maxDayLimit){
-      this.finalString = "This is";
-      for(int i=dayValue - 1; i>=this.minDayLimit; i--){
-        this.getStringForDay(i);
-      }
-      this.finalString = this.finalString.concat(".");
+  public String revealPoetry(){
+    final Integer dayValue = this.getDayValue();
+    if(this.checkDayWithinRange(dayValue)){
+      return this.getPoetryTale.getPoetryForDay(dayValue);
+    }
+    return "Day value is outside the range";
+  }
+
+  public Integer getDayValue(){
+    return Integer.parseInt((String)this.getPoetryTale.flags.get(this.getPoetryTale.DAY_VALUE));
+  }
+
+  public Boolean checkDayWithinRange(Integer dayValue){
+    return dayValue > this.getPoetryTale.MIN_DAY_LIMIT &&  dayValue <= this.getPoetryTale.tales.length;
+  }
+}
+
+class WholePoetry implements Poetry{
+  private CumulativePoetry getPoetryTale;
+
+  WholePoetry(CumulativePoetry getPoetryTale){
+      this.getPoetryTale = getPoetryTale;
+  }
+
+  public String revealPoetry() {
+    String wholePoem = IntStream.range(this.getPoetryTale.MIN_DAY_LIMIT, this.getPoetryTale.tales.length)
+    .mapToObj(dayValue -> {
+      final String taleForDay = this.getPoetryTale.getPoetryForDay(dayValue + 1);
+      return String.format("Day %d -\n", dayValue + 1).concat(taleForDay + "\n");
+    }).collect(Collectors.joining());
+    return wholePoem;
+  }
+}
+
+class NotPoetryProblem implements Poetry{
+  public String revealPoetry(){
+    return "Please enter a specific operation";
+  }
+}
+
+class CumulativePoetry{
+  final int MIN_DAY_LIMIT;
+  final String[] tales;
+  final String REVEAL_FOR_DAY = "--reveal-for-day";
+  final String RECITE = "--recite";
+  final String DAY_VALUE = "for_which_day";
+  HashMap<String, Object> flags;
+  Poetry poetry;
+
+  CumulativePoetry(HashMap<String, Object> flags){
+    this.MIN_DAY_LIMIT = 0;
+    this.flags = flags;
+    this.tales = new String[]{
+      " the horse and the hound and the horn that belonged to",
+      " the farmer sowing his corn that kept",
+      " the rooster that crowed in the morn that woke",
+      " the priest all shaven and shorn that married",
+      " the man all tattered and torn that kissed",
+      " the maiden all forlorn that milked",
+      " that cow with the crumpled horn that tossed",
+      " the dog that worried",
+      " the cat that killed",
+      " the rat that ate",
+      " the malth that lay in",
+      " the house that Jack built"
+    };
+  }
+
+  public String revealTaleForDay(int dayValue){
+    return this.tales[dayValue];
+  }
+
+  public String getPoetryForDay(int dayValue){
+    String taleForDay = IntStream.range(this.tales.length - dayValue, this.tales.length)
+    .mapToObj(day -> this.revealTaleForDay(day))
+    .collect(Collectors.joining());
+    return "This is".concat(taleForDay).concat(".");
+  }
+
+  public String getPoetryTale(){
+    if((Boolean)this.flags.get(this.REVEAL_FOR_DAY)){
+        poetry = new PoetryTaleForDay(this);
+    }
+    else if((Boolean)this.flags.get(this.RECITE)){
+        poetry = new WholePoetry(this);
     }
     else{
-      this.finalString = "Day value is outside the range";
+        poetry = new NotPoetryProblem();
     }
-    return this.finalString;
+    return poetry.revealPoetry();
   }
 }
 
-class WholePoetry extends GetPoetryTale implements PoetryClass{
-  String fullPoetry;
-
-  WholePoetry(String[] taleForDay, List<String> args){
-    this.day = taleForDay;
-    this.operationList = args;
-    this.finalString = "";
-    this.fullPoetry = "";
-    this.maxDayLimit = 12;
-    this.minDayLimit = 0;
-  }
-
-  public String poetryTaleOperation(){
-    for(int i=this.minDayLimit; i<this.maxDayLimit; i++){
-      System.out.println(String.format("Day %d -", i+1));
-      this.fullPoetry = this.fullPoetry.concat(String.format("Day %d -", i+1));
-      this.finalString = "This is";
-      for(int j=i; j>=this.minDayLimit; j--){
-          this.getStringForDay(j);
-      }
-      this.finalString = this.finalString.concat(".");
-      this.fullPoetry = this.fullPoetry.concat(this.finalString);
-      System.out.println(this.finalString);
-    }
-    return this.fullPoetry;
-  }
-}
-
-class GetPoetryTale{
-  int maxDayLimit;
-  int minDayLimit;
-  String[] day;
-  List<String> operationList;
-  String finalString;
-
-  public void getStringForDay(int iterationValue){
-    this.finalString = this.finalString.concat(this.day[iterationValue]);
-  }
-
-  public String getPoetryTale(String[] taleForDay, String[] args){
-      List<String> operationList = Arrays.asList(args);
-      String finalString = "";
-      if(operationList.contains("--reveal-for-day")){
-          PoetryClass poetry = new PoetryTale(taleForDay, operationList);
-          finalString = poetry.poetryTaleOperation();
-      }
-      else if(operationList.contains("--recite")){
-          PoetryClass poetry = new WholePoetry(taleForDay, operationList);
-          finalString = poetry.poetryTaleOperation();
-      }
-      else{
-          finalString = "Please enter a specific operation";
-      }
-      return finalString;
-  }
-}
-
-public class App extends GetPoetryTale{
-  String[] taleForDay;
-  String[] arguments;
+public class App{
+  List<String> flags;
+  final String REVEAL_FOR_DAY = "--reveal-for-day";
+  final String RECITE = "--recite";
+  final String DAY_VALUE = "for_which_day";
 
   App(String[] args){
-    taleForDay = new String[12];
-    taleForDay[0] = " the house that Jack built";
-    taleForDay[1] = " the malt that lay in";
-    taleForDay[2] = " the rat that ate";
-    taleForDay[3] = " the cat that killed";
-    taleForDay[4] = " the dog that worried";
-    taleForDay[5] = " that cow with the crumpled horn that tossed";
-    taleForDay[6] = " the maiden all forlorn that milked";
-    taleForDay[7] = " the man all tattered and torn that kissed";
-    taleForDay[8] = " the priest all shaven and shorn that married";
-    taleForDay[9] = " the rooster that crowed in the morn that woke";
-    taleForDay[10] = " the farmer sowing his corn that kept";
-    taleForDay[11] = " the horse and the hound and the horn that belonged to";
-    arguments = args;
+    flags = Arrays.asList(args);
   }
 
-  public String getTaleForDay(){
-    String finalPoetry = "";
-    finalPoetry = this.getPoetryTale(this.taleForDay, this.arguments);
-    if(! Arrays.asList(this.arguments).contains("--recite")){
-      System.out.println(finalPoetry);
-    }
+  public HashMap<String, Object> parseArgs(){
+    HashMap<String, Object> arguments = new HashMap<String, Object>();
+    arguments.put(this.REVEAL_FOR_DAY, this.flags.contains(this.REVEAL_FOR_DAY));
+    arguments.put(this.RECITE, this.flags.contains(this.RECITE));
+    arguments.put(this.DAY_VALUE, this.flags.contains(this.REVEAL_FOR_DAY) ? "" + this.flags.get(this.flags.indexOf(this.REVEAL_FOR_DAY) + 1) : "0");
+    return arguments;
+  }
+
+  public String getPoetryTale(){
+    CumulativePoetry poetry = new CumulativePoetry(this.parseArgs());
+    String finalPoetry = poetry.getPoetryTale();
+    System.out.println(finalPoetry);
     return finalPoetry;
   }
 
   public static void main(String[] args) {
       App app = new App(args);
-      String finalPoetry = app.getTaleForDay();
+      String finalPoetry = app.getPoetryTale();
   }
 }
