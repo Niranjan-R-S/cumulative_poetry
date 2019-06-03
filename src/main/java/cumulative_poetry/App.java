@@ -22,12 +22,12 @@ public class App{
   public String getPoetryTale(){
     CumulativePoetry poetry = new CumulativePoetry(this.parseArgs());
     String finalPoetry = poetry.getPoetryTale();
-    System.out.println(finalPoetry);
     return finalPoetry;
   }
 
   public static void main(String[] args) {
       App app = new App(args);
       String finalPoetry = app.getPoetryTale();
+      System.out.println(finalPoetry);
   }
 }
