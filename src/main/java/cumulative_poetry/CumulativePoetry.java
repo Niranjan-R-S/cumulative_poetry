@@ -5,16 +5,11 @@ import java.util.stream.IntStream;
 import poetry.*;
 
 public class CumulativePoetry{
-  public final int MIN_DAY_LIMIT;
   public final String[] tales;
-  public final String REVEAL_FOR_DAY = "--reveal-for-day";
-  public final String RECITE = "--recite";
-  public final String DAY_VALUE = "for_which_day";
   public HashMap<String, Object> flags;
   public Poetry poetry;
 
   CumulativePoetry(HashMap<String, Object> flags){
-    this.MIN_DAY_LIMIT = 0;
     this.flags = flags;
     this.tales = new String[]{
       " the horse and the hound and the horn that belonged to",
@@ -44,10 +39,10 @@ public class CumulativePoetry{
   }
 
   public String getPoetryTale(){
-    if((Boolean)this.flags.get(this.REVEAL_FOR_DAY)){
+    if((Boolean)this.flags.get(Constants.REVEAL_FOR_DAY)){
         poetry = new PoetryTaleForDay(this);
     }
-    else if((Boolean)this.flags.get(this.RECITE)){
+    else if((Boolean)this.flags.get(Constants.RECITE)){
         poetry = new WholePoetry(this);
     }
     else{

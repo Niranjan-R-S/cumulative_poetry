@@ -1,5 +1,6 @@
 package poetry;
 import cumulative_poetry.CumulativePoetry;
+import static cumulative_poetry.Constants.*;
 
 public class PoetryTaleForDay implements Poetry{
   public CumulativePoetry getPoetryTale;
@@ -17,10 +18,10 @@ public class PoetryTaleForDay implements Poetry{
   }
 
   public Integer getDayValue(){
-    return Integer.parseInt((String)this.getPoetryTale.flags.get(this.getPoetryTale.DAY_VALUE));
+    return Integer.parseInt((String)this.getPoetryTale.flags.get(DAY_VALUE));
   }
 
   public Boolean checkDayWithinRange(Integer dayValue){
-    return dayValue > this.getPoetryTale.MIN_DAY_LIMIT &&  dayValue <= this.getPoetryTale.tales.length;
+    return dayValue > MIN_DAY_LIMIT &&  dayValue <= this.getPoetryTale.tales.length;
   }
 }
