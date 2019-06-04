@@ -3,51 +3,37 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import poetry.*;
+import static constants.Constants.*;
 
 public class CumulativePoetry{
-  public final String[] tales;
   public HashMap<String, Object> flags;
   public Poetry poetry;
 
-  CumulativePoetry(HashMap<String, Object> flags){
+  public CumulativePoetry(HashMap<String, Object> flags){
     this.flags = flags;
-    this.tales = new String[]{
-      " the horse and the hound and the horn that belonged to",
-      " the farmer sowing his corn that kept",
-      " the rooster that crowed in the morn that woke",
-      " the priest all shaven and shorn that married",
-      " the man all tattered and torn that kissed",
-      " the maiden all forlorn that milked",
-      " that cow with the crumpled horn that tossed",
-      " the dog that worried",
-      " the cat that killed",
-      " the rat that ate",
-      " the malth that lay in",
-      " the house that Jack built"
-    };
   }
 
   public String revealTaleForDay(int dayValue){
-    return this.tales[dayValue];
+    return tales[dayValue];
   }
 
   public String getPoetryForDay(int dayValue){
-    String taleForDay = IntStream.range(this.tales.length - dayValue, this.tales.length)
+    String taleForDay = IntStream.range(tales.length - dayValue, tales.length)
     .mapToObj(day -> this.revealTaleForDay(day))
     .collect(Collectors.joining());
     return "This is".concat(taleForDay).concat(".");
   }
 
   public String getPoetryTale(){
-    if((Boolean)this.flags.get(Constants.REVEAL_FOR_DAY)){
-        poetry = new PoetryTaleForDay(this);
+    if((Boolean)this.flags.get(REVEAL_FOR_DAY)){
+        poetry = new PoetryTaleForDay();
     }
-    else if((Boolean)this.flags.get(Constants.RECITE)){
-        poetry = new WholePoetry(this);
+    else if((Boolean)this.flags.get(RECITE)){
+        poetry = new WholePoetry();
     }
     else{
         poetry = new NotPoetryProblem();
     }
-    return poetry.revealPoetry();
+    return poetry.revealPoetry(this);
   }
 }
