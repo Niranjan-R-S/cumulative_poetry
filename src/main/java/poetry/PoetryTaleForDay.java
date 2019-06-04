@@ -1,19 +1,23 @@
 package poetry;
 import cumulative_poetry.CumulativePoetry;
 import static constants.Constants.*;
+import java.util.*;
 
 public class PoetryTaleForDay implements Poetry{
 
-  public String revealPoetry(CumulativePoetry getPoetryTale){
-    final Integer dayValue = this.getDayValue(getPoetryTale);
+  public List<String> revealPoetry(CumulativePoetry poetry){
+    final Integer dayValue = this.getDayValue(poetry);
+    List<String> poems = new ArrayList();
     if(this.checkDayWithinRange(dayValue)){
-      return getPoetryTale.getPoetryForDay(dayValue);
+      poems.add(poetry.getPoetryForDay(dayValue));
+      return poems;
     }
-    return "Day value is outside the range";
+    poems.add("Day value is outside the range");
+    return poems;
   }
 
-  public Integer getDayValue(CumulativePoetry getPoetryTale){
-    return Integer.parseInt((String)getPoetryTale.flags.get(DAY_VALUE));
+  public Integer getDayValue(CumulativePoetry poetry){
+    return Integer.parseInt((String)poetry.flags.get(DAY_VALUE));
   }
 
   public Boolean checkDayWithinRange(Integer dayValue){

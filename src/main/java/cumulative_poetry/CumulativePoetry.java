@@ -24,7 +24,7 @@ public class CumulativePoetry{
     return "This is".concat(taleForDay).concat(".");
   }
 
-  public String getPoetryTale(){
+  public List<String> getPoetryTale(){
     if((Boolean)this.flags.get(REVEAL_FOR_DAY)){
         poetry = new PoetryTaleForDay();
     }

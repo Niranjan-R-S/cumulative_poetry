@@ -1,7 +1,8 @@
-package application;
+package app;
 import java.util.*;
 import cumulative_poetry.*;
 import constants.Constants;
+import java.util.stream.*;
 
 public class App{
   List<String> flags;
@@ -18,14 +19,23 @@ public class App{
     return arguments;
   }
 
-  public String getPoetryTale(){
+  public List<String> getPoetryTale(){
     CumulativePoetry poetry = new CumulativePoetry(this.parseArgs());
-    String finalPoetry = poetry.getPoetryTale();
-    return finalPoetry;
+    return poetry.getPoetryTale();
+  }
+
+  public void revealPoetry(List<String> poems){
+    if(poems.size() > 1){
+      poems.stream().forEach(poemForDay -> {
+        System.out.println(String.format("Day %d -\n", poems.indexOf(poemForDay) + 1).concat(poemForDay + "\n"));
+      });
+      return;
+    }
+    System.out.println(poems.get(0));
   }
 
   public static void main(String[] args) {
       App app = new App(args);
-      System.out.println(app.getPoetryTale());
+      app.revealPoetry(app.getPoetryTale());
   }
 }
