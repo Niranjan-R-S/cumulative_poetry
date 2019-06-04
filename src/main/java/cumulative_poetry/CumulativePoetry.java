@@ -14,11 +14,11 @@ public class CumulativePoetry{
   }
 
   public String revealTaleForDay(int dayValue){
-    return tales[dayValue];
+    return TALES[dayValue];
   }
 
   public String getPoetryForDay(int dayValue){
-    String taleForDay = IntStream.range(tales.length - dayValue, tales.length)
+    String taleForDay = IntStream.range(TALES.length - dayValue, TALES.length)
     .mapToObj(day -> this.revealTaleForDay(day))
     .collect(Collectors.joining());
     return "This is".concat(taleForDay).concat(".");

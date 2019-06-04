@@ -17,6 +17,6 @@ public class PoetryTaleForDay implements Poetry{
   }
 
   public Boolean checkDayWithinRange(Integer dayValue){
-    return dayValue > MIN_DAY_LIMIT &&  dayValue <= tales.length;
+    return dayValue > MIN_DAY_LIMIT &&  dayValue <= TALES.length;
   }
 }
