@@ -1,3 +1,4 @@
+package application;
 import java.util.*;
 import cumulative_poetry.*;
 import constants.Constants;
@@ -25,7 +26,6 @@ public class App{
 
   public static void main(String[] args) {
       App app = new App(args);
-      String finalPoetry = app.getPoetryTale();
-      System.out.println(finalPoetry);
+      System.out.println(app.getPoetryTale());
   }
 }
