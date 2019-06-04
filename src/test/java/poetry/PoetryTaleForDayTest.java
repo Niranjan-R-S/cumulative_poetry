@@ -14,7 +14,9 @@ public class PoetryTaleForDayTest {
         flags.put(DAY_VALUE, "1");
         CumulativePoetry mockClass = new CumulativePoetry(flags);
         PoetryTaleForDay classUnderTest = new PoetryTaleForDay();
-        assertEquals(classUnderTest.revealPoetry(mockClass), "This is the house that Jack built.");
+        List<String> poems = new ArrayList();
+        poems.add("This is the house that Jack built.");
+        assertEquals(classUnderTest.revealPoetry(mockClass), poems);
     }
 
     @Test public void testGetDayValue() {

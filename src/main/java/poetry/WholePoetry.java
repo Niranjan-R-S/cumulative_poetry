@@ -3,15 +3,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import cumulative_poetry.CumulativePoetry;
 import static constants.Constants.*;
+import java.util.*;
 
 public class WholePoetry implements Poetry{
 
-  public String revealPoetry(CumulativePoetry getPoetryTale) {
-    String wholePoem = IntStream.range(MIN_DAY_LIMIT, TALES.length)
-    .mapToObj(dayValue -> {
-      final String taleForDay = getPoetryTale.getPoetryForDay(dayValue + 1);
-      return String.format("Day %d -\n", dayValue + 1).concat(taleForDay + "\n");
-    }).collect(Collectors.joining());
-    return wholePoem;
+  public List<String> revealPoetry(CumulativePoetry poetry) {
+    List<String> poems = IntStream.range(MIN_DAY_LIMIT, TALES.length)
+    .mapToObj(dayValue -> poetry.getPoetryForDay(dayValue + 1))
+    .collect(Collectors.toList());
+    return poems;
   }
 }

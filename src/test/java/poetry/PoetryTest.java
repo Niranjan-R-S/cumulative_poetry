@@ -15,7 +15,8 @@ public abstract class PoetryTest {
         flags.put(DAY_VALUE, "0");
         CumulativePoetry mockClass = new CumulativePoetry(flags);
         Poetry classUnderTest = createInstance();
-        assertEquals(classUnderTest.revealPoetry(mockClass), "");
+        List<String> poems = new ArrayList();
+        assertEquals(classUnderTest.revealPoetry(mockClass), poems);
     }
 
 }

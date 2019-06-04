@@ -14,7 +14,9 @@ public class NotPoetryProblemTest {
         flags.put(DAY_VALUE, "0");
         CumulativePoetry mockClass = new CumulativePoetry(flags);
         NotPoetryProblem classUnderTest = new NotPoetryProblem();
-        assertEquals(classUnderTest.revealPoetry(mockClass), "Please enter a specific operation");
+        List<String> poems = new ArrayList();
+        poems.add("Please enter a specific operation");
+        assertEquals(classUnderTest.revealPoetry(mockClass), poems);
     }
 
 }
