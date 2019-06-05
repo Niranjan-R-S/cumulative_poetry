@@ -7,17 +7,18 @@ public class PoetryTaleForDay implements Poetry{
 
   public List<String> revealPoetry(CumulativePoetry poetry){
     final Integer dayValue = this.getDayValue(poetry);
-    List<String> poems = new ArrayList();
     if(this.checkDayWithinRange(dayValue)){
-      poems.add(poetry.getPoetryForDay(dayValue));
-      return poems;
+      return Arrays.asList(
+       poetry.getPoetryForDay(dayValue)
+      );
     }
-    poems.add("Day value is outside the range");
-    return poems;
+    return Arrays.asList(
+     "Day value is outside the range"
+    );
   }
 
   public Integer getDayValue(CumulativePoetry poetry){
-    return Integer.parseInt((String)poetry.flags.get(DAY_VALUE));
+    return Integer.parseInt(poetry.flags.revealForDay);
   }
 
   public Boolean checkDayWithinRange(Integer dayValue){

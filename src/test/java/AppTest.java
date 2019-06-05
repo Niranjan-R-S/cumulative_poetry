@@ -1,4 +1,4 @@
-package app;
+package poetry_application;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.*;
@@ -6,27 +6,15 @@ import constants.Constants;
 
 public class AppTest {
 
-    @Test public void testParseArgs() {
-        String[] args = new String[]{
-          Constants.REVEAL_FOR_DAY,
-          "1"
-        };
-        App classUnderTest = new App(args);
-        HashMap<String, Object> flags = new HashMap<String, Object>();
-        flags.put(Constants.REVEAL_FOR_DAY, true);
-        flags.put(Constants.RECITE, false);
-        flags.put(Constants.DAY_VALUE, "1");
-        assertEquals(classUnderTest.parseArgs(), flags);
-    }
-
     @Test public void testRevealTaleForDayInRange() {
         String[] args = new String[]{
           Constants.REVEAL_FOR_DAY,
           "1"
         };
         App classUnderTest = new App(args);
-        List<String> poems = new ArrayList();
-        poems.add("This is the house that Jack built.");
+        List<String> poems = Arrays.asList(
+         "This is the house that Jack built."
+        );
         assertEquals(classUnderTest.getPoetryTale(), poems);
     }
 
@@ -36,19 +24,18 @@ public class AppTest {
           "0"
         };
         App classUnderTest = new App(args);
-        List<String> poems = new ArrayList();
-        poems.add("Day value is outside the range");
+        List<String> poems = Arrays.asList(
+         "Day value is outside the range"
+        );
         assertEquals(classUnderTest.getPoetryTale(), poems);
     }
 
     @Test public void testRevealNoOperationFound() {
-        String[] args = new String[]{
-          Constants.NOT_POETRY_PROBLEM,
-          "0"
-        };
+        String[] args = new String[]{};
         App classUnderTest = new App(args);
-        List<String> poems = new ArrayList();
-        poems.add("Please enter a specific operation");
+        List<String> poems = Arrays.asList(
+         "Please enter a specific operation"
+        );
         assertEquals(classUnderTest.getPoetryTale(), poems);
     }
 
@@ -58,19 +45,20 @@ public class AppTest {
           Constants.RECITE
         };
         App classUnderTest = new App(args);
-        List<String> poems = new ArrayList();
-        poems.add("This is the house that Jack built.");
-        poems.add("This is the malth that lay in the house that Jack built.");
-        poems.add("This is the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is the cat that killed the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.");
-        poems.add("This is the horse and the hound and the horn that belonged to the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.");
+        List<String> poems = Arrays.asList(
+         "This is the house that Jack built.",
+         "This is the malth that lay in the house that Jack built.",
+         "This is the rat that ate the malth that lay in the house that Jack built.",
+         "This is the cat that killed the rat that ate the malth that lay in the house that Jack built.",
+         "This is the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.",
+         "This is that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.",
+         "This is the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.",
+         "This is the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.",
+         "This is the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.",
+         "This is the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.",
+         "This is the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.",
+         "This is the horse and the hound and the horn that belonged to the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built."
+        );
         assertEquals(classUnderTest.getPoetryTale(), poems);
     }
 

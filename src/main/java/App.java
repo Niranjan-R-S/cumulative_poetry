@@ -1,26 +1,26 @@
-package app;
+package poetry_application;
 import java.util.*;
 import cumulative_poetry.*;
 import constants.Constants;
 import java.util.stream.*;
+import com.google.devtools.common.options.OptionsParser;
 
 public class App{
-  List<String> flags;
+  public ApplicationFlags flags;
 
-  App(String[] args){
-    flags = Arrays.asList(args);
+  public App(String[] args){
+      this.flags = this.parseArgs(args);
   }
 
-  public HashMap<String, Object> parseArgs(){
-    HashMap<String, Object> arguments = new HashMap<String, Object>();
-    arguments.put(Constants.REVEAL_FOR_DAY, this.flags.contains(Constants.REVEAL_FOR_DAY));
-    arguments.put(Constants.RECITE, this.flags.contains(Constants.RECITE));
-    arguments.put(Constants.DAY_VALUE, this.flags.contains(Constants.REVEAL_FOR_DAY) ? "" + this.flags.get(this.flags.indexOf(Constants.REVEAL_FOR_DAY) + 1) : "0");
-    return arguments;
+  public ApplicationFlags parseArgs(String[] args){
+    OptionsParser parser = OptionsParser.newOptionsParser(ApplicationFlags.class);
+    parser.parseAndExitUponError(args);
+    ApplicationFlags options = parser.getOptions(ApplicationFlags.class);
+    return options;
   }
 
   public List<String> getPoetryTale(){
-    CumulativePoetry poetry = new CumulativePoetry(this.parseArgs());
+    CumulativePoetry poetry = new CumulativePoetry(this.flags);
     return poetry.getPoetryTale();
   }
 
