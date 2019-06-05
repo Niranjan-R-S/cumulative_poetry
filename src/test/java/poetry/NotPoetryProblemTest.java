@@ -1,4 +1,5 @@
 package poetry;
+import poetry_application.*;
 import cumulative_poetry.CumulativePoetry;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -8,14 +9,13 @@ import static constants.Constants.*;
 public class NotPoetryProblemTest {
 
     @Test public void testRevealPoetry() {
-        HashMap<String, Object> flags = new HashMap<String, Object>();
-        flags.put(REVEAL_FOR_DAY, false);
-        flags.put(RECITE, false);
-        flags.put(DAY_VALUE, "0");
-        CumulativePoetry mockClass = new CumulativePoetry(flags);
+        String[] args = new String[]{};
+        App app = new App(args);
+        CumulativePoetry mockClass = new CumulativePoetry(app.flags);
         NotPoetryProblem classUnderTest = new NotPoetryProblem();
-        List<String> poems = new ArrayList();
-        poems.add("Please enter a specific operation");
+        List<String> poems = Arrays.asList(
+         "Please enter a specific operation"
+        );
         assertEquals(classUnderTest.revealPoetry(mockClass), poems);
     }
 

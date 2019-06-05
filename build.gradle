@@ -40,9 +40,10 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("com.github.pcj:google-options:1.0.0")
     testCompile("junit:junit:4.12")
 }
 
 
 // Define the main class for the application
-mainClassName = 'app.App'
+mainClassName = 'poetry_application.App'
