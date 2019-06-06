@@ -15,8 +15,7 @@ public class App{
   public ApplicationFlags parseArgs(String[] args){
     OptionsParser parser = OptionsParser.newOptionsParser(ApplicationFlags.class);
     parser.parseAndExitUponError(args);
-    ApplicationFlags options = parser.getOptions(ApplicationFlags.class);
-    return options;
+    return parser.getOptions(ApplicationFlags.class);
   }
 
   public List<String> getPoetryTale(){

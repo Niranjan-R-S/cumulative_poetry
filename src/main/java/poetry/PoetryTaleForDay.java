@@ -2,12 +2,16 @@ package poetry;
 import cumulative_poetry.CumulativePoetry;
 import static constants.Constants.*;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class PoetryTaleForDay implements Poetry{
 
   public List<String> revealPoetry(CumulativePoetry poetry){
     final Integer dayValue = this.getDayValue(poetry);
-    if(this.checkDayWithinRange(dayValue)){
+
+    Predicate<Integer> checkDayWithinRange = value -> (value > MIN_DAY_LIMIT &&  value <= TALES.length);
+
+    if(checkDayWithinRange.test(dayValue)){
       return Arrays.asList(
        poetry.getPoetryForDay(dayValue)
       );
@@ -21,7 +25,4 @@ public class PoetryTaleForDay implements Poetry{
     return Integer.parseInt(poetry.flags.revealForDay);
   }
 
-  public Boolean checkDayWithinRange(Integer dayValue){
-    return dayValue > MIN_DAY_LIMIT &&  dayValue <= TALES.length;
-  }
 }

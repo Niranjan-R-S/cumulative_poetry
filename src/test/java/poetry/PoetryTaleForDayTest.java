@@ -32,9 +32,4 @@ public class PoetryTaleForDayTest {
         assertEquals(classUnderTest.getDayValue(mockClass), dayValue);
     }
 
-    @Test public void testCheckDayWithinRange() {
-        final Integer dayValue = 1;
-        PoetryTaleForDay classUnderTest = new PoetryTaleForDay();
-        assertEquals(classUnderTest.checkDayWithinRange(dayValue), true);
-    }
 }
