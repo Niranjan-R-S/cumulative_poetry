@@ -1,5 +1,5 @@
 package poetry;
-import poetry_application.*;
+import application_flags.*;
 import cumulative_poetry.CumulativePoetry;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -23,11 +23,11 @@ public class WholePoetryTest {
          "This is the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built.",
          "This is the horse and the hound and the horn that belonged to the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked that cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malth that lay in the house that Jack built."
         );
-        String[] args = new String[]{
-          RECITE
-        };
-        App app = new App(args);
-        CumulativePoetry mockClass = new CumulativePoetry(app.flags);
+        ApplicationFlags flags = new ApplicationFlags();
+        flags.revealForDay = "";
+        flags.help = true;
+        flags.recite = true;
+        CumulativePoetry mockClass = new CumulativePoetry(flags);
         WholePoetry classUnderTest = new WholePoetry();
         assertEquals(classUnderTest.revealPoetry(mockClass), poems);
     }

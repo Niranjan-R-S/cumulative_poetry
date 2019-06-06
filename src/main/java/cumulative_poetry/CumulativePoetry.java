@@ -1,5 +1,5 @@
 package cumulative_poetry;
-import poetry_application.*;
+import application_flags.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

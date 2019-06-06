@@ -1,5 +1,5 @@
 package poetry;
-import poetry_application.*;
+import application_flags.*;
 import cumulative_poetry.CumulativePoetry;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -9,12 +9,11 @@ import static constants.Constants.*;
 public class PoetryTaleForDayTest {
 
     @Test public void testRevealPoetry() {
-        String[] args = new String[]{
-          REVEAL_FOR_DAY,
-          "1"
-        };
-        App app = new App(args);
-        CumulativePoetry mockClass = new CumulativePoetry(app.flags);
+        ApplicationFlags flags = new ApplicationFlags();
+        flags.revealForDay = "1";
+        flags.help = true;
+        flags.recite = false;
+        CumulativePoetry mockClass = new CumulativePoetry(flags);
         PoetryTaleForDay classUnderTest = new PoetryTaleForDay();
         List<String> poems = Arrays.asList(
          "This is the house that Jack built."
@@ -24,12 +23,11 @@ public class PoetryTaleForDayTest {
 
     @Test public void testGetDayValue() {
         final Integer dayValue = 1;
-        String[] args = new String[]{
-          REVEAL_FOR_DAY,
-          "1"
-        };
-        App app = new App(args);
-        CumulativePoetry mockClass = new CumulativePoetry(app.flags);
+        ApplicationFlags flags = new ApplicationFlags();
+        flags.revealForDay = "1";
+        flags.help = true;
+        flags.recite = false;
+        CumulativePoetry mockClass = new CumulativePoetry(flags);
         PoetryTaleForDay classUnderTest = new PoetryTaleForDay();
         assertEquals(classUnderTest.getDayValue(mockClass), dayValue);
     }

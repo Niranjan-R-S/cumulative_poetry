@@ -1,4 +1,4 @@
-package poetry_application;
+import application_flags.*;
 import java.util.*;
 import cumulative_poetry.*;
 import constants.Constants;

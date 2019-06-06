@@ -1,4 +1,4 @@
-package poetry_application;
+package application_flags;
 import com.google.devtools.common.options.Option;
 import com.google.devtools.common.options.OptionsBase;
 import java.util.*;

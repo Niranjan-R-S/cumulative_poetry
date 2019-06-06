@@ -1,5 +1,5 @@
 package poetry;
-import poetry_application.*;
+import application_flags.*;
 import cumulative_poetry.CumulativePoetry;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -9,9 +9,11 @@ import static constants.Constants.*;
 public class NotPoetryProblemTest {
 
     @Test public void testRevealPoetry() {
-        String[] args = new String[]{};
-        App app = new App(args);
-        CumulativePoetry mockClass = new CumulativePoetry(app.flags);
+        ApplicationFlags flags = new ApplicationFlags();
+        flags.revealForDay = "";
+        flags.help = true;
+        flags.recite = false;
+        CumulativePoetry mockClass = new CumulativePoetry(flags);
         NotPoetryProblem classUnderTest = new NotPoetryProblem();
         List<String> poems = Arrays.asList(
          "Please enter a specific operation"
