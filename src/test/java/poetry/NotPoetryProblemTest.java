@@ -1,10 +1,9 @@
 package poetry;
-import application_flags.*;
+import application_flags.ApplicationFlags;
 import cumulative_poetry.CumulativePoetry;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.*;
-import static constants.Constants.*;
 
 public class NotPoetryProblemTest {
 

@@ -1,9 +1,8 @@
-import application_flags.*;
-import java.util.*;
-import cumulative_poetry.*;
-import constants.Constants;
-import java.util.stream.*;
+import application_flags.ApplicationFlags;
 import com.google.devtools.common.options.OptionsParser;
+import cumulative_poetry.CumulativePoetry;
+
+import java.util.List;
 
 public class App{
   public ApplicationFlags flags;

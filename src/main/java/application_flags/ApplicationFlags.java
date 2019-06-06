@@ -1,7 +1,6 @@
 package application_flags;
 import com.google.devtools.common.options.Option;
 import com.google.devtools.common.options.OptionsBase;
-import java.util.*;
 
 public class ApplicationFlags extends OptionsBase {
 

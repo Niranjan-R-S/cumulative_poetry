@@ -1,9 +1,8 @@
 package cumulative_poetry;
-import application_flags.*;
+import application_flags.ApplicationFlags;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.*;
-import static constants.Constants.*;
 
 public class CumulativePoetryTest {
 
